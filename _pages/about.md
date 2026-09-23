@@ -1,14 +1,20 @@
 ---
-permalink: /about/
-title: "About"
+permalink: /
+title: "Home"
+redirect_from:
+  - /about/
 ---
 
 Hi, I'm Marcus 👋!
 I love building things that make life a little better.
 
+<div class="home-actions">
+  <a class="btn btn--primary" href="{{ '/resume/' | relative_url }}">View Resume</a>
+</div>
+
 ### 💻 Background
 
-I am currently on my final year of BEng Computer Science & Design (CSD) at the Singapore University of Technology & Design.
+I am currently in my final year of <a href="https://www.sutd.edu.sg/istd">B.Eng in Computer Science &amp; Design (CSD)</a> at the <a href="https://www.sutd.edu.sg/">Singapore University of Technology and Design</a>.
 
 <div class="about-terminal" id="about-terminal">
   <div class="terminal-header">
@@ -142,7 +148,61 @@ I am currently on my final year of BEng Computer Science & Design (CSD) at the S
   </div>
 </div>
 
+<!-- Featured Projects Section -->
+
+<section class="home-currently" aria-labelledby="home-currently-title">
+  <h3 id="home-currently-title">🌱 Currently Working On</h3>
+  <!-- Update this short note as your current work changes. -->
+  <p>Building an app to track my snacks and their expiry dates. Follow the <a href="{{ '/projects/snackapp/' | relative_url }}">Snack App project</a>.</p>
+</section>
+
+<section class="home-projects" aria-labelledby="home-projects-title">
+  <h3 id="home-projects-title">🛠️ Featured Projects</h3>
+  <div class="home-project-grid">
+    <a class="home-project-card" href="{{ '/projects/computer-vision/' | relative_url }}">
+      <img src="{{ '/assets/images/project-vision-placeholder.svg' | relative_url }}" alt="" width="640" height="400" loading="lazy">
+      <span class="home-project-overlay">
+        <span class="home-project-title">Object Detection &amp; Classification</span>
+        <span class="home-project-more">View Project <span aria-hidden="true">&rarr;</span></span>
+      </span>
+    </a>
+    <a class="home-project-card" href="{{ '/projects/robot-interface/' | relative_url }}">
+      <img src="{{ '/assets/images/project-robot-placeholder.svg' | relative_url }}" alt="" width="640" height="400" loading="lazy">
+      <span class="home-project-overlay">
+        <span class="home-project-title">Robot User Interface</span>
+        <span class="home-project-more">View Project <span aria-hidden="true">&rarr;</span></span>
+      </span>
+    </a>
+  </div>
+</section>
+
 <style>
+.home-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0 2rem; }
+.home-actions .btn { margin: 0; }
+.home-actions a:focus-visible, .home-currently a:focus-visible { outline: 3px solid #287b91; outline-offset: 4px; }
+.home-currently { margin: 2rem 0; }
+.home-currently p { padding-left: 1rem; border-left: 3px solid #287b91; }
+.home-projects { margin: 2rem 0; }
+.home-project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.home-project-grid .home-project-card { position: relative; display: block; overflow: hidden; aspect-ratio: 8 / 5; border: 1px solid #344753; border-radius: 10px; background: #14232f; color: #fff; text-decoration: none; transition: box-shadow 220ms ease, border-color 220ms ease; }
+.home-project-card img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 300ms ease; }
+.home-project-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.4rem; padding: 1.1rem; background: linear-gradient(transparent 15%, rgba(5, 12, 20, 0.95)); }
+.home-project-title { max-width: 26ch; font-size: 0.9em; font-weight: 700; line-height: 1.35; }
+.home-project-card:hover, .home-project-card:focus-visible { border-color: #58a6ff; box-shadow: 0 8px 24px rgba(13, 17, 23, 0.2); }
+.home-project-card:hover img, .home-project-card:focus-visible img { transform: scale(1.06); }
+.home-project-card:focus-visible { outline: 3px solid #287b91; outline-offset: 4px; }
+.home-project-more { font-size: 0.7em; color: #b8e4ff; }
+@media (hover: hover) and (pointer: fine) {
+  .home-project-more { opacity: 0; transform: translateY(5px); transition: opacity 220ms ease, transform 220ms ease; }
+  .home-project-card:hover .home-project-more, .home-project-card:focus-visible .home-project-more { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-project-card, .home-project-card img, .home-project-more { transition: none !important; transform: none !important; }
+}
+@media (max-width: 600px) {
+  .home-project-grid { grid-template-columns: 1fr; }
+}
+
 .about-terminal {
   width: 100%;
   margin: 2rem 0;
@@ -489,6 +549,10 @@ I am currently on my final year of BEng Computer Science & Design (CSD) at the S
 }
 
 
+@media (hover: none) {
+  .interest-details { max-height: none; opacity: 1; transform: none; }
+}
+
 /* Accessibility */
 
 @media (prefers-reduced-motion: reduce) {
@@ -537,6 +601,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const terminalHistory =
     document.getElementById("terminal-history");
 
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let animationStarted = false;
 
 
@@ -549,6 +614,11 @@ document.addEventListener("DOMContentLoaded", function () {
     text,
     speed = 60
   ) {
+
+    if (reducedMotion) {
+      element.textContent = text;
+      return Promise.resolve();
+    }
 
     return new Promise((resolve) => {
 
@@ -587,6 +657,7 @@ document.addEventListener("DOMContentLoaded", function () {
   ------------------------- */
 
   function delay(ms) {
+    if (reducedMotion) return Promise.resolve();
 
     return new Promise(
       resolve =>
@@ -800,7 +871,7 @@ Systems
 `,
 
     contact: `
-Reach out to me on my social links to the left (e.g., LinkedIn, GitHub)!
+Find me through the LinkedIn, GitHub, and email links in my profile.
 `
   };
 
@@ -883,7 +954,7 @@ Reach out to me on my social links to the left (e.g., LinkedIn, GitHub)!
 
 
     terminal.scrollIntoView({
-      behavior: "smooth",
+      behavior: reducedMotion ? "auto" : "smooth",
       block: "nearest"
     });
 
@@ -936,17 +1007,11 @@ Reach out to me on my social links to the left (e.g., LinkedIn, GitHub)!
       );
 
 
-      /*
-        CHANGE THIS URL
-        if your projects page
-        has another path.
-      */
-
       setTimeout(
         function () {
 
           window.location.href =
-            "/projects/";
+            {{ "/projects/" | relative_url | jsonify }};
 
         },
         400
@@ -958,7 +1023,7 @@ Reach out to me on my social links to the left (e.g., LinkedIn, GitHub)!
 
 
     if (
-      commands[command]
+      Object.prototype.hasOwnProperty.call(commands, command)
     ) {
 
       addHistory(
@@ -1018,8 +1083,8 @@ Type "help" to see available commands.`,
       function (event) {
 
         if (
-          event.target.tagName
-          !== "A"
+          !event.target.closest("a, button, input") &&
+          !window.getSelection().toString()
         ) {
 
           terminalInput.focus();

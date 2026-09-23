@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400">
+  <rect width="640" height="400" fill="#142f40"/>
+  <g stroke="#28495c" stroke-width="1">
+    <path d="M0 80h640M0 160h640M0 240h640M0 320h640M80 0v400M160 0v400M240 0v400M320 0v400M400 0v400M480 0v400M560 0v400"/>
+  </g>
+  <circle cx="310" cy="170" r="72" fill="#2d6174"/>
+  <rect x="394" y="114" width="85" height="96" rx="12" fill="#397d89"/>
+  <g fill="none" stroke="#80e5d0" stroke-width="3">
+    <path d="M222 135v-53h53M345 82h53v53M398 205v53h-53M275 258h-53v-53"/>
+    <rect x="382" y="102" width="109" height="120" rx="3"/>
+  </g>
+  <text x="28" y="35" fill="#99bdcd" font-family="monospace" font-size="12" letter-spacing="2">PROJECT PREVIEW / PLACEHOLDER</text>
+</svg>

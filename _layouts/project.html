@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+{% assign locale = page.locale | default: site.locale %}
+<div id="main" role="main">
+  {% include sidebar.html locale=locale %}
+  <article class="page h-entry" aria-labelledby="page-title">
+    <div class="page__inner-wrap">
+      <header>
+        <a class="btn btn--primary project-back" href="{{ '/projects/' | relative_url }}">&larr; Back to All Projects</a>
+        <h1 id="page-title" class="page__title p-name">{{ page.title | escape }}</h1>
+      </header>
+      <section class="page__content e-content">
+<p class="project-context">{{ page.context | escape }}</p>
+{% assign project_image = page.project_image | default: '/assets/images/project-placeholder.svg' %}
+<img class="project-hero-image" src="{{ project_image | relative_url }}" alt="{{ page.project_image_alt | default: 'Project image placeholder' | escape }}" width="960" height="540">
+
+{{ content }}
+
+{% if page.technologies %}
+<ul class="project-tags" aria-label="Technologies and topics">
+  {% for technology in page.technologies %}
+  <li>{{ technology | escape }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+      </section>
+    </div>
+  </article>
+</div>
+
+<style>
+.page__content .project-hero-image { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; margin: 1rem 0 1.5rem; border: 1px solid #d5d9dc; border-radius: 8px; background: #eef2f5; }
+.project-back { margin-bottom: 1rem; }
+.project-back:focus-visible { outline: 3px solid #287b91; outline-offset: 4px; }
+.page__content .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.25rem 0; padding: 0; list-style: none; }
+.page__content .project-tags li { margin: 0; padding: 0.2rem 0.65rem; border: 1px solid #d5d9dc; border-radius: 4px; font-size: 0.75em; }
+</style>

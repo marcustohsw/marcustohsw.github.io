@@ -1,27 +1,42 @@
-# Minimal Mistakes remote theme starter
+# Marcus Toh’s Portfolio
 
-Click [**Use this template**](https://github.com/mmistakes/mm-github-pages-starter/generate) button above for the quickest method of getting started with the [Minimal Mistakes Jekyll theme](https://github.com/mmistakes/minimal-mistakes).
+A Jekyll portfolio using the Minimal Mistakes remote theme, hosted on GitHub Pages.
 
-Contains basic configuration to get you a site with:
+## Local Preview
 
-- Sample posts.
-- Sample top navigation.
-- Sample author sidebar with social links.
-- Sample footer links.
-- Paginated home page.
-- Archive pages for posts grouped by year, category, and tag.
-- Sample about page.
-- Sample 404 page.
-- Site wide search.
+Use Ruby 3.3 and Bundler, then run:
 
-Replace sample content with your own and [configure as necessary](https://mmistakes.github.io/minimal-mistakes/docs/configuration/).
+```sh
+bundle install
+bundle exec jekyll serve --livereload
+```
 
----
+Open http://localhost:4000/. Restart the server after editing `_config.yml`.
 
-## Troubleshooting
+## Editing Content
 
-If you have a question about using Jekyll, start a discussion on the [Jekyll Forum](https://talk.jekyllrb.com/) or [StackOverflow](https://stackoverflow.com/questions/tagged/jekyll). Other resources:
+- Homepage: `_pages/about.md`
+- Resume: `_pages/resume.md`
+- Projects index: `_pages/projects.md`
+- Project articles: `_projects/*.md`
+- Project article layout: `_layouts/project.html`
+- Navigation: `_data/navigation.yml`
+- Site settings and social links: `_config.yml`
+- Images: `assets/images/`
 
-- [Ruby 101](https://jekyllrb.com/docs/ruby-101/)
-- [Setting up a Jekyll site with GitHub Pages](https://jekyllrb.com/docs/github-pages/)
-- [Configuring GitHub Metadata](https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md#configuration) to work properly when developing locally and avoid `No GitHub API authentication could be found. Some fields may be missing or have incorrect data.` warnings.
+To add a project, copy an existing file in `_projects/`, give it a unique filename,
+and edit its title, excerpt, context, order, technologies, and content. The filename
+sets its URL, such as `/projects/snackapp/`. It appears in the project index automatically.
+Replace `project_image` and `project_image_alt` to use your own project image.
+
+The homepage is served at `/`; the old `/about/` address redirects there.
+
+## Before Publishing
+
+```sh
+JEKYLL_ENV=production bundle exec jekyll build
+```
+
+Commit the source files, including new project articles, layouts, and images.
+Do not edit or upload `_site/`; Jekyll generates it. The remote theme needs network
+access during builds. Project illustrations currently include intentional placeholders.

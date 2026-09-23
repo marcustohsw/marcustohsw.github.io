@@ -14,6 +14,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: MTSW
+url: "https://marcustohsw.github.io"
+baseurl: ""
 email:
 description: >- # this means to ignore newlines until "baseurl:"
   Marcus Toh's personal portfolio website.
@@ -28,12 +30,22 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: Asia/Singapore
 
 include:
   - _pages
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - node_modules/
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -49,7 +61,7 @@ include:
 
 # Plugins (previously gems:)
 plugins:
-  - jekyll-paginate
+  - jekyll-redirect-from
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
@@ -58,8 +70,8 @@ plugins:
 
 author:
   name   : "Marcus Toh"
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "AI X Cybersecurity Student"
+  avatar : "/assets/images/IMG_7679.jpg"
+  bio    : "AI & Cybersecurity Student"
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
@@ -74,6 +86,9 @@ author:
       icon: "fas fa-fw fa-envelope"
       url: "mailto:marcustohsw@icloud.com"
 
+atom_feed:
+  hide: true
+
 footer:
   links:
     - label: "GitHub"
@@ -84,17 +99,14 @@ footer:
       url: "https://huggingface.co/marcustoh"
 
 defaults:
-  # _posts
   - scope:
       path: ""
-      type: posts
+      type: projects
     values:
-      layout: single
+      layout: project
       author_profile: true
-      read_time: true
-      comments: true
-      share: true
-      related: true
+      share: false
+      related: false
   # _pages
   - scope:
       path: "_pages"
@@ -102,10 +114,3 @@ defaults:
     values:
       layout: single
       author_profile: true
-
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/
